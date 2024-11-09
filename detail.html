@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Chi tiết sản phẩm</title>
+
+	<link rel="stylesheet" href="assets/css/bootstrap.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<script src="assets/js/jquery-3.7.1.js"></script>
+	<script src="assets/js/bootstrap.bundle.js"></script>
+	<script src="assets/js/common.js"></script>
+	<script src="assets/js/cart.js"></script>
+
+	<script>
+		render = (p) => {
+			updateCart = () => {
+				addToCart(p);
+			}
+			return `
+				<h3>${p.name}</h3>
+				<div>
+					<span class='text-secondary'> Hãng SX: </span>
+					<i>${p.mfr}</i>
+				</div>
+				<div>
+					<span class='text-secondary'> Mô tả: </span>
+					<i>${p.desc}</i>
+				</div>
+				<div>
+					<span class='text-secondary'> Tình trạng: </span>
+					<i>${p.stock}</i>
+				</div>
+				<div>
+					<span class='text-secondary'> Giá: </span>
+					<i>${p.price}</i>
+				</div>
+				<div class='mt-auto'>
+					<span class="quantily">Số lượng:</span>
+					<input class='col-1' type='text' value=1></input>
+				</div>
+				<div class='mt-auto'>
+					<a href="javascript:updateCart()" class="btn btn-primary"><i class="bi bi-cart"></i> Thêm vào giỏ hàng</a>
+				</div>
+			`;
+		}
+
+		render_all = (product) => {
+			$('title').html(product.name);
+			$('#desc').html(render(product));
+			$('#product-image').attr('src', product.img);
+			$('#product-detail').html(product.detail);
+			$('table').addClass('table'); // for inline tables
+		}
+
+		$(() => {
+			$("#header").load("./views/common/header.html");
+			$("#footer").load("./views/common/footer.html");
+			$("#sidebar").load("./views/common/sidebar.html");
+
+			var cate = getUrlParams('cate');
+			var index = getUrlParams('index');
+			var plist = getProductList(cate);
+			if (index == undefined
+				|| index < 0
+				|| index > plist.length)
+				index = 0;
+			var product = plist[index];
+			// console.log(product);
+			// console.log(plist);
+			render_all(product);
+		});
+	</script>
+</head>
+
+<body>
+
+	<div id="header"></div>
+
+	<div class="container p-0 mt-2 d-flex">
+		<div class="col-3 bg-light" id="sidebar"></div>
+		<div class="col-9 ps-2">
+			<div class="row placeholder-glow">
+				<div class="col-6 row">
+					<img id="product-image" src="assets/img/no-image.png" alt="">
+				</div>
+				<div class="col-6 d-flex row" id="desc">
+					<h3 class="placeholder col-12"></h3>
+					<h3 class="placeholder col-6"></h3>
+					<br>
+					<span class="placeholder col-3"></span>
+					<span class="placeholder col-8"></span>
+					<span class="placeholder col-3"></span>
+					<span class="placeholder col-8"></span>
+				</div>
+			</div>
+			<div class="col-12 mt-5">
+				<h2>Chi tiết sản phẩm</h2>
+				<div id="product-detail">
+					detail
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="text-bg-dark mt-5" id="footer"></div>
+</body>
+
+</html>

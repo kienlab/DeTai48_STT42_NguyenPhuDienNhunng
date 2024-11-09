@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Giới thiệu Linh Kiện Điện tử KIENLAB</title>
+
+	<link rel="stylesheet" href="assets/css/bootstrap.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<script src="assets/js/jquery-3.7.1.js"></script>
+	<script src="assets/js/bootstrap.bundle.js"></script>
+	<script src="assets/js/common.js"></script>
+	<script src="assets/js/cart.js"></script>
+
+	<script>
+		$(() => {
+			$("#header").load("./views/common/header.html");
+			$("#footer").load("./views/common/footer.html");
+			$("#sidebar").load("./views/common/sidebar.html");
+		});
+	</script>
+</head>
+
+<body>
+
+	<div id="header"></div>
+
+	<div class="container">
+		<div class="d-flex flex-row justify-content-center">
+			<form method="post" action="login" class="d-2">
+				<h1 class="row mt-5">Đăng ký</h1>
+				<p class="row mb-4">Chào mừng đến với cửa hàng linh kiện điện tử KIENLAB</p>
+				<div class="row form-group mt-3"><input id="" name="username" type="text"
+						placeholder="Tên" class="form-control"></div>
+				<div class="row form-group mt-3"><input id="exampleInputEmail1" name="username" type="text"
+						placeholder="Username" class="form-control"></div>
+				<div class="row form-group mt-3"><input id="exampleInputPassword1" name="password" type="password"
+						placeholder="Password" class="form-control"></div>
+				<div class="row form-group mt-3"><input id="exampleInputPassword2" name="password" type="password"
+						placeholder="Nhập lại Password" class="form-control"></div>
+				<div class="row mt-5"><button type="submit" class="btn btn-primary">Đăng ký</button></div>
+			</form>
+		</div>
+	</div>
+
+	<div class="text-bg-dark mt-5" id="footer"></div>
+</body>
+
+</html>

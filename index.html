@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Linh Kiện Điện tử KIENLAB</title>
+
+	<link rel="stylesheet" href="assets/css/bootstrap.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<script src="assets/js/jquery-3.7.1.js"></script>
+	<script src="assets/js/bootstrap.bundle.js"></script>
+	<script src="assets/js/common.js"></script>
+	<script src="assets/js/cart.js"></script>
+
+	<script>
+		render_card = (p, i, cate) => {
+			return `
+				<a class="card col-2 text-decoration-none" href="detail.html?cate=${cate}&index=${i}">
+					<img src="${p.img}" class="card-img-top img-thumbnail">
+					<div class="card-body">
+						<h5 class="card-title overflow-hidden" style="height: 100px;">${p.name}</h5>
+						<p class="card-text overflow-hidden" style="height: 60px;"><small>${p.desc}</small></p>
+					</div>
+				</a>
+			`;
+		};
+
+		render_cards = (plist, cate) => {
+			render = '';
+			plist.forEach((e, i) => {
+				render += render_card(e, i, cate);
+			});
+			return render;
+		};
+
+		$(() => {
+			$("#header").load("./views/common/header.html");
+			$("#footer").load("./views/common/footer.html");
+			$("#sidebar").load("./views/common/sidebar.html");
+			
+			cate = 'ic-vi-dieu-khien';
+			plist = getProductList(cate);
+			$('#product-list1').html(render_cards(plist, cate));
+			
+			cate = 'mach-cam-bien';
+			plist = getProductList(cate);
+			$('#product-list2').html(render_cards(plist, cate));
+
+			cate = 'lcd-mau';
+			plist = getProductList(cate);
+			$('#product-list3').html(render_cards(plist, cate));
+
+			cate = 'canh-tay-robot-robot-tu-hanh';
+			plist = getProductList(cate);
+			$('#product-list4').html(render_cards(plist, cate));
+
+		});
+	</script>
+</head>
+
+<body>
+
+	<div id="header"></div>
+
+	<div class="container p-0 mt-2 d-flex flex-wrap">
+		<div class="col-12 ps-2">
+			<img src="assets/img/home/bg.png" class="d-block w-100" ">
+			<div id=" carousel-autoplay" class="carousel slide" data-bs-ride="carousel">
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+					aria-current="true" aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+					aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+					aria-label="Slide 3"></button>
+			</div>
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="assets/img/home/slide1.png" class="d-block w-100" ">
+					</div>
+					<div class=" carousel-item">
+					<img src="assets/img/home/slide2.png" class="d-block w-100" ">
+					</div>
+					<div class=" carousel-item">
+					<img src="assets/img/home/slide3.png" class="d-block w-100" ">
+					</div>
+				</div>
+				<button class=" carousel-control-prev" type="button" data-bs-target="#carousel-autoplay" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button" data-bs-target="#carousel-autoplay"
+						data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
+				</div>
+		</div>
+
+		<h3 class="mt-5">Vi điều khiển</h3>
+		<div class="d-flex flex-wrap" id="product-list1"></div>
+
+		<h3 class="mt-5">Mạch cảm biến</h3>
+		<div class="d-flex flex-wrap" id="product-list2"></div>
+
+		<h3 class="mt-5">Màn hình LCD</h3>
+		<div class="d-flex flex-wrap" id="product-list3"></div>
+
+		<h3 class="mt-5">Robot</h3>
+		<div class="d-flex flex-wrap" id="product-list4"></div>
+
+	</div>
+
+	<div class="text-bg-dark mt-5" id="footer"></div>
+</body>
+
+</html>

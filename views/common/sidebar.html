@@ -1,0 +1,45 @@
+<div id="categories">
+
+	<script type="text/javascript">
+		category_render = (data, level, id) => {
+			if (Object.keys(data).length == 0)
+				return '';
+
+			if (id == '')
+				render = `<ul class='nav flex-column ms-${level*3} ps-${level*3}' id='#${id}'>`;
+			else 
+				render = `<ul class='nav collapse flex-column ms-${level*3} ps-${level*3}' id='${id}'>`;
+
+			data.forEach(e => {
+				// console.log(e.name)
+				id = getIdFromCategoricalLink(e.link);
+				if (Object.keys(e.childs).length == 0)
+					render += `<li class='nav-item border-top'> 
+						
+						<a class='nav-link' href='products.html?cate=${id}'">
+							${e.name}
+						</a>
+					`;
+				else
+					render += `<li class='nav-item bg-light border-top'> 
+						
+						<a class='nav-link' href='${'#'+ id}' data-bs-toggle="collapse" aria-expanded="false" aria-controls="${id}">
+							${e.name}
+						</a>
+					`;
+
+				render += category_render(e.childs, level+1, id);
+				render += `</li>`;
+			});
+			render += `</ul>`;
+			return render;
+		};
+		$(() => {
+			$.getJSON("category.json", (data) => {
+				$('#categories').html(category_render(data, 0, ''));
+			});
+		})
+	</script>
+
+
+</div>
